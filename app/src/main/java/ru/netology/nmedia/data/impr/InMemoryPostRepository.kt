@@ -20,13 +20,13 @@ class InMemoryPostRepository : PostRepository {
             Post(
                 id = 5,
                 postName = "Нетология. Университет интернет-профессий",
-                postData = "22.08.2022",
+                postData = "07.08.2022",
                 postText = "Привет, это новая Нетология!"
             ),
             Post(
                 id = 4,
                 postName = "Нетология. Университет интернет-профессий",
-                postData = "22.08.2022",
+                postData = "15.09.2022",
                 postText = "Привет, это новая Нетология!"
             ),
             Post(
@@ -65,11 +65,10 @@ class InMemoryPostRepository : PostRepository {
     override fun share(postId: Long) {
         posts = posts.map { post ->
             if (post.id == postId) post.copy(
-                shares = post.shares,
-                countShareFormat = countShared(post.shares)
+                shares = post.shares + 1,
+                countShareFormat = countShared(post.shares + 1)
             )
-            post.shares++
-            post
+            else post
         }
     }
 }
