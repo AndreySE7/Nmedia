@@ -13,4 +13,12 @@
     <string name="count_share">0</string>
     <string name="count_viewing">345</string>
     <string name="viewing">Просмотрено</string>
+    <string name="remove">Удалить</string>
+    <string name="edit_text">Введите текст</string>
+    <string name="description_edit">Введите текст</string>
+    <string name="edit">Редактировать</string>
+    <string name="description_cancelEditButton">Отмена редактирования</string>
+    <string name="addPostText">Добавление поста</string>
+    <string name="editPostText">Редактирование текста:</string>
+    <string name="imageEdit">Картинка редактирования</string>
 </resources>
