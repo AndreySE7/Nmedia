@@ -17,4 +17,13 @@
     <style name="Widget.AppTheme.LikeCheckBox" parent="Widget.MaterialComponents.Button.TextButton.Icon">
         <item name="iconTint">@color/like_checkbox_tint</item>
     </style>
+
+    <style name="Widget.AppTheme.ShareCheckBox" parent="Widget.MaterialComponents.Button.TextButton.Icon">
+        <item name="iconTint">@color/share_checkbox_tint</item>
+    </style>
+
+    <style name="Widget.AppTheme.OptionsCheckBox" parent="Widget.MaterialComponents.Button.TextButton.Icon">
+        <item name="iconTint">@color/options_checkbox_tint</item>
+    </style>
+
 </resources>

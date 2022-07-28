@@ -43,13 +43,18 @@ class PostAdapter(
                     when (menuItem.itemId) {
                         R.id.remove -> {
                             listener.onDeleteClicked(post)
+                            binding.options.isChecked = false
                             true
                         }
                         R.id.edit -> {
                             listener.onEditClicked(post)
+                            binding.options.isChecked = false
                             true
                         }
-                    else -> false
+                        else -> {                             // else -> false
+                            binding.options.isChecked = false
+                            false
+                        }
                     }
                 }
             }
@@ -76,7 +81,9 @@ class PostAdapter(
                 postText.text = post.postText
                 like.text = post.countLikeFormat.toString()
                 like.isChecked = post.likedByMe
-                countShare.text = post.countShareFormat.toString()
+                like.setBackgroundColor(android.R.drawable.btn_default)
+                share.text = post.countShareFormat.toString()
+                share.isChecked = false
             }
         }
     }

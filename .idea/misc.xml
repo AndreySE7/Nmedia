@@ -17,6 +17,18 @@
         <entry key="..\:/Users/Andre/AndroidStudioProjects/Nmedia/app/src/main/res/layout/post.xml" value="0.33" />
         <entry key="..\:/Users/Andre/AndroidStudioProjects/Nmedia/app/src/main/res/layout/post_list.xml" value="0.33" />
         <entry key="..\:/Users/Andre/AndroidStudioProjects/Nmedia/app/src/main/res/menu/options_post.xml" value="0.18541666666666667" />
+        <entry key="..\:/Users/andre/AndroidStudioProjects/Nmedia/app/src/main/res/drawable/ic_add_options.xml" value="0.1" />
+        <entry key="..\:/Users/andre/AndroidStudioProjects/Nmedia/app/src/main/res/drawable/ic_launcher_foreground.xml" value="0.1665" />
+        <entry key="..\:/Users/andre/AndroidStudioProjects/Nmedia/app/src/main/res/drawable/ic_like.xml" value="0.1665" />
+        <entry key="..\:/Users/andre/AndroidStudioProjects/Nmedia/app/src/main/res/drawable/ic_liked.xml" value="0.1" />
+        <entry key="..\:/Users/andre/AndroidStudioProjects/Nmedia/app/src/main/res/drawable/ic_options.xml" value="0.1" />
+        <entry key="..\:/Users/andre/AndroidStudioProjects/Nmedia/app/src/main/res/drawable/ic_red_like.xml" value="0.1665" />
+        <entry key="..\:/Users/andre/AndroidStudioProjects/Nmedia/app/src/main/res/drawable/ic_red_share.xml" value="0.1665" />
+        <entry key="..\:/Users/andre/AndroidStudioProjects/Nmedia/app/src/main/res/drawable/ic_share.xml" value="0.1" />
+        <entry key="..\:/Users/andre/AndroidStudioProjects/Nmedia/app/src/main/res/drawable/ic_shared.xml" value="0.1665" />
+        <entry key="..\:/Users/andre/AndroidStudioProjects/Nmedia/app/src/main/res/layout/activity_main.xml" value="0.358695652173913" />
+        <entry key="..\:/Users/andre/AndroidStudioProjects/Nmedia/app/src/main/res/layout/post_list.xml" value="0.358695652173913" />
+        <entry key="..\:/Users/andre/AndroidStudioProjects/Nmedia/app/src/main/res/menu/options_post.xml" value="0.36666666666666664" />
       </map>
     </option>
   </component>
