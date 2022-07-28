@@ -95,4 +95,12 @@
         android:contentDescription="@string/imageEdit"
         android:visibility="gone"/>
 
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/groupEdit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:constraint_referenced_ids="cancelEditButton, editPostText,
+        textEditText, imageEditText" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,5 +1,6 @@
 package ru.netology.nmedia.adapter
 
+
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.PopupMenu
@@ -61,6 +62,9 @@ class PostAdapter(
             binding.share.setOnClickListener {
                 listener.onShareClicked(post)
             }
+            binding.options.setOnClickListener {
+                popupMenu.show()
+            }
         }
 
         fun bind(post: Post) {
@@ -70,17 +74,14 @@ class PostAdapter(
                 postName.text = post.postName
                 postData.text = post.postData
                 postText.text = post.postText
-                countLike.text = post.countLikeFormat.toString()
+                like.text = post.countLikeFormat.toString()
+                like.isChecked = post.likedByMe
                 countShare.text = post.countShareFormat.toString()
-                like.setImageResource(
-                    if (post.likedByMe) R.drawable.ic_red_like else R.drawable.ic_like
-                )
-                options.setOnClickListener {
-                    popupMenu.show()
-                }
             }
         }
     }
+
+
 
     private object DiffCallBack : DiffUtil.ItemCallback<Post>() {
         override fun areItemsTheSame(oldItem: Post, newItem: Post) =

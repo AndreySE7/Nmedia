@@ -38,33 +38,19 @@ class MainActivity : AppCompatActivity() {
                     requestFocus()
                     showKeyboard()
                     setSelection(content.length)
-                    with(binding.editPostText) { //надпись "редактирование поста:"
+                    with(binding.groupEdit) { //надпись "редактирование поста:"
                         visibility = VISIBLE
                     }
                     with(binding.textEditText) { //текст редактируемого поста
-                        visibility = VISIBLE
                         text = content
                     }
-                    with(binding.imageEditText) { //текст редактируемого поста
-                        visibility = VISIBLE
-                    }
                     with(binding.cancelEditButton) {
-                        visibility = VISIBLE
                         setOnClickListener {
                             viewModel.onSaveButtonClicked(content)
                         }
                     }
                 } else {
-                    with(binding.editPostText) { //надпись "редактирование поста:"
-                        visibility = GONE
-                    }
-                    with(binding.cancelEditButton) {
-                        visibility = GONE
-                    }
-                    with(binding.imageEditText) { //текст редактируемого поста
-                        visibility = GONE
-                    }
-                    with(binding.textEditText) {
+                    with(binding.groupEdit) {
                         visibility = GONE
                     }
                     clearFocus()
