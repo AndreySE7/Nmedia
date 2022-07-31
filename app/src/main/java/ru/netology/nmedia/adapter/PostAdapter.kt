@@ -1,6 +1,5 @@
 package ru.netology.nmedia.adapter
 
-
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.PopupMenu
@@ -43,18 +42,13 @@ class PostAdapter(
                     when (menuItem.itemId) {
                         R.id.remove -> {
                             listener.onDeleteClicked(post)
-                            binding.options.isChecked = false
                             true
                         }
                         R.id.edit -> {
                             listener.onEditClicked(post)
-                            binding.options.isChecked = false
                             true
                         }
-                        else -> {                             // else -> false
-                            binding.options.isChecked = false
-                            false
-                        }
+                        else -> false
                     }
                 }
             }
@@ -87,8 +81,6 @@ class PostAdapter(
             }
         }
     }
-
-
 
     private object DiffCallBack : DiffUtil.ItemCallback<Post>() {
         override fun areItemsTheSame(oldItem: Post, newItem: Post) =

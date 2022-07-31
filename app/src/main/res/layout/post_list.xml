@@ -47,9 +47,8 @@
         style="@style/Widget.AppTheme.OptionsCheckBox"
         android:layout_width="32dp"
         android:layout_height="wrap_content"
-        android:checkable="true"
+        android:checkable="false"
         android:contentDescription="@string/options"
-        android:background="@android:color/transparent"
         app:icon="@drawable/ic_add_options"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/avatar" />
@@ -86,6 +85,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:checkable="true"
+        android:textColor="@color/gray"
         android:contentDescription="@string/like"
         app:icon="@drawable/ic_liked"
         app:layout_constraintStart_toStartOf="parent"
@@ -94,12 +94,13 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/share"
-        style="@style/Widget.AppTheme.LikeCheckBox"
+        style="@style/Widget.AppTheme.ShareCheckBox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:checkable="true"
+        android:checkable="false"
+        android:textColor="@color/gray"
         android:contentDescription="@string/share"
-        app:icon="@drawable/ic_share"
+        app:icon="@drawable/ic_shared"
         app:layout_constraintStart_toEndOf="@id/like"
         app:layout_constraintTop_toTopOf="@id/headerBarrier2"
         tools:text="0"/>
