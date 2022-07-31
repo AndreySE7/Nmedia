@@ -12,4 +12,12 @@
     <string name="count_share">0</string>
     <string name="count_viewing">345</string>
     <string name="viewing">Viewing</string>
+    <string name="remove">Remove</string>
+    <string name="edit_text">Edit text</string>
+    <string name="description_edit">Editing</string>
+    <string name="edit">Edit post</string>
+    <string name="description_cancelEditButton">Cancel edit</string>
+    <string name="addPostText">Add post</string>
+    <string name="editPostText">Edit message:</string>
+    <string name="imageEdit">Image edit</string>
 </resources>

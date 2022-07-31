@@ -1,45 +1,62 @@
 package ru.netology.nmedia
 
 import android.os.Bundle
+import android.view.View.*
 import androidx.activity.viewModels
-import androidx.annotation.DrawableRes
 import androidx.appcompat.app.AppCompatActivity
+import ru.netology.nmedia.adapter.PostAdapter
 import ru.netology.nmedia.databinding.ActivityMainBinding
-import ru.netology.nmedia.dto.Post
+import ru.netology.nmedia.util.hideKeyboard
+import ru.netology.nmedia.util.showKeyboard
 import ru.netology.nmedia.viewModel.PostViewModel
 
 class MainActivity : AppCompatActivity() {
 
-    private val viewModel by viewModels<PostViewModel>()
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         val binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        viewModel.data.observe(this) {post ->
-            binding.render(post)
+        val viewModel: PostViewModel by viewModels()
 
-            binding.like.setOnClickListener {
-                 viewModel.onLikeClicked()
+        val adapter = PostAdapter(viewModel)
+        binding.postsRecyclerView.adapter = adapter
+        viewModel.data.observe(this) {posts ->
+            adapter.submitList(posts)
+        }
+        binding.saveButton.setOnClickListener {
+            with(binding.contentEditText) {
+                val content = text.toString()
+                viewModel.onSaveButtonClicked(content)
             }
-            binding.share.setOnClickListener {
-                viewModel.onShareClicked()
+        }
+        viewModel.currentPost.observe(this) { currentPost ->
+            with(binding.contentEditText) {
+                val content = currentPost?.postText
+                setText(content)
+                if (content != null) {
+                    requestFocus()
+                    showKeyboard()
+                    setSelection(content.length)
+                    with(binding.groupEdit) { //группа отображений для редактирования поста
+                        visibility = VISIBLE
+                    }
+                    with(binding.textEditText) { //текст редактируемого поста
+                        text = content
+                    }
+                    with(binding.cancelEditButton) { //отмена редактирования поста
+                        setOnClickListener {
+                            viewModel.onSaveButtonClicked(content)
+                        }
+                    }
+                } else {
+                    with(binding.groupEdit) {
+                        visibility = GONE
+                    }
+                    clearFocus()
+                    hideKeyboard()
+                }
             }
         }
     }
-
-    private fun ActivityMainBinding.render(post: Post) {
-        postName.text = post.postName
-        postData.text = post.postData
-        postText.text = post.postText
-        countLike.text = post.countLikeFormat.toString()
-        countShare.text = post.countShareFormat.toString()
-        like.setImageResource(getLikeIconRes(post.likedByMe))
-    }
 }
-
-@DrawableRes
-private fun getLikeIconRes(liked: Boolean) =
-    if (liked) R.drawable.ic_red_like else R.drawable.ic_like
