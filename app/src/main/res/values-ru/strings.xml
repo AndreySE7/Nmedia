@@ -21,4 +21,6 @@
     <string name="addPostText">Добавление поста</string>
     <string name="editPostText">Редактирование текста:</string>
     <string name="imageEdit">Картинка редактирования</string>
+    <string name="button_ok">Добавить пост</string>
+    <string name="button_cancel">Кнопка отмены</string>
 </resources>

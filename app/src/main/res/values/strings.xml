@@ -20,4 +20,6 @@
     <string name="addPostText">Add post</string>
     <string name="editPostText">Edit message:</string>
     <string name="imageEdit">Image edit</string>
+    <string name="button_ok">Add post</string>
+    <string name="button_cancel">Button cancel</string>
 </resources>
