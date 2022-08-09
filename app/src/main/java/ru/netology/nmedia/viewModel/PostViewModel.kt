@@ -13,7 +13,7 @@ class PostViewModel : ViewModel(), PostInteractionListener {
 
     val data by repository::data
 
-    private val currentPost = SingleLiveEvent<Post?>()
+    private val currentPost = MutableLiveData<Post?>(null)
 
     val shareEvent = SingleLiveEvent<String>()
 

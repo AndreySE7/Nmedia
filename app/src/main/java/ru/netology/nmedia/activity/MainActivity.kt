@@ -2,18 +2,10 @@ package ru.netology.nmedia.activity
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.View.GONE
-import android.view.View.VISIBLE
-import androidx.activity.result.launch
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import ru.netology.nmedia.R
 import ru.netology.nmedia.adapter.PostAdapter
-import ru.netology.nmedia.databinding.ActivityEditPostBinding
 import ru.netology.nmedia.databinding.ActivityMainBinding
-import ru.netology.nmedia.dto.Post
-import ru.netology.nmedia.util.hideKeyboard
-import ru.netology.nmedia.util.showKeyboard
 import ru.netology.nmedia.viewModel.PostViewModel
 
 class MainActivity : AppCompatActivity() {
@@ -50,7 +42,7 @@ class MainActivity : AppCompatActivity() {
             postText?.let(viewModel::onSaveButtonClicked)
         }
         viewModel.navigateToPostContentScreenEvent.observe(this) {
-            activityLauncher.launch()
+            activityLauncher.launch(it)
         }
     }
 }
