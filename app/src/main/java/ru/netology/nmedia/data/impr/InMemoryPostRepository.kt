@@ -7,35 +7,73 @@ import ru.netology.nmedia.dto.countLiked
 import ru.netology.nmedia.dto.countShared
 
 class InMemoryPostRepository : PostRepository {
+
+    private var nextId = GENERATED_POSTS_AMOUNT.toLong()
+
+    private var posts
+        get() = checkNotNull(data.value)
+        set(value) {
+            data.value = value
+        }
+
     override val data = MutableLiveData(
-        Post(
-            id = 0L,
-            postName = "Нетология. Университет интернет-профессий",
-            postData = "20.06.2022",
-            postText = "Привет, это новая Нетология! Когда-то Нетология начиналась с интенсивов по онлайн-маркетингу. Затем появились курсы по дизайну, разработке, аналитике и управлению. Мы растём сами и помогаем расти студентам: от новичков до уверенных профессионалов. Но самое важное остаётся с нами: мы верим, что в каждом уже есть сила, которая заставляет хотеть больше, целиться выше, бежать быстрее. Наша миссия - помочь встать на путь роста и начать цепочку перемен → https://netolo.gy/fyb"
-        )
+        List(GENERATED_POSTS_AMOUNT) { index ->
+            Post(
+                id = index + 1L,
+                postName = "Нетология. Университет интернет-профессий",
+                postData = "07.08.2022",
+                postText = "Привет, это новая Нетология!",
+                video = "https://www.youtube.com/watch?v=4IIjp2mljbs&ab_channel=KOSMO"
+            )
+        }
     )
 
-    override fun like() {
-        val currentPost = checkNotNull(data.value) {
+    override fun like(postId: Long) {
+        posts = posts.map {
+            if (it.id == postId) it.copy(
+                likedByMe = !it.likedByMe,
+                likes = it.likes,
+                countLikeFormat = countLiked(it.likes, !it.likedByMe)
+            )
+            else it
         }
-        val likedPost = currentPost.copy(
-            likes = currentPost.likes,
-            likedByMe = !currentPost.likedByMe,
-            countLikeFormat = countLiked(currentPost.likes, !currentPost.likedByMe)
-        )
-        data.value = likedPost
     }
 
-    override fun share() {
-        val currentPost = checkNotNull(data.value) {
+    override fun share(postId: Long) {
+        posts = posts.map {
+            if (it.id == postId) it.copy(
+                shares = ++it.shares,
+                countShareFormat = countShared(it.shares)
+            )
+            else it
         }
-        val sharedPost = currentPost.copy(
-            shares = currentPost.shares,
-            countShareFormat = countShared(currentPost.shares)
-        )
-        ++sharedPost.shares
-        data.value = sharedPost
     }
 
+    override fun deletePost(postId: Long) {
+        posts = posts.filter {
+            it.id != postId
+        }
+    }
+
+    override fun savePost(post: Post) {
+        if (post.id == PostRepository.NEW_POST_ID) insert(post) else update(post)
+    }
+
+    private fun insert(post: Post) {
+        data.value = listOf(
+            post.copy(
+                id = ++nextId
+            )
+        ) + posts
+    }
+
+    private fun update(post: Post) {
+        data.value = posts.map {
+            if (it.id == post.id) post else it
+        }
+    }
+
+    private companion object {
+        const val GENERATED_POSTS_AMOUNT = 10
+    }
 }
