@@ -23,4 +23,7 @@
     <string name="imageEdit">Картинка редактирования</string>
     <string name="button_ok">Добавить пост</string>
     <string name="button_cancel">Кнопка отмены</string>
+    <string name="video">Видео</string>
+    <string name="enable_video">Включить видео</string>
+    <string name="video_url">Ссылка на видео</string>
 </resources>

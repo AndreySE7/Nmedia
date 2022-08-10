@@ -17,10 +17,11 @@ class NewPostActivity : AppCompatActivity() {
         val binding = ActivityNewPostBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val intentReceived = intent ?: return
-        val text = intentReceived.getStringExtra(POST_CONTENT_EXTRA_KEY)
-        binding.contentEditText.setText(text)
+        val postText = intent.getStringExtra(POST_CONTENT_EXTRA_KEY)
+        val url = intent.getStringExtra(POST_VIDEO_EXTRA_KEY)
+        binding.contentEditText.setText(postText)
         binding.contentEditText.focusAndShowKeyboard()
+        binding.videoUrl.setText(url)
 
         binding.ok.setOnClickListener {
             val intent = Intent()
@@ -28,28 +29,41 @@ class NewPostActivity : AppCompatActivity() {
                 setResult(Activity.RESULT_CANCELED, intent)
             } else {
                 val content = binding.contentEditText.text.toString()
+                val videoURL = binding.videoUrl.text.toString()
                 intent.putExtra(POST_CONTENT_EXTRA_KEY, content)
+                intent.putExtra(POST_VIDEO_EXTRA_KEY, videoURL)
                 setResult(Activity.RESULT_OK, intent)
             }
             finish()
         }
     }
 
-    companion object {
+    private companion object {
         private const val POST_CONTENT_EXTRA_KEY = "postContent"
+        private const val POST_VIDEO_EXTRA_KEY = "newVideo"
+
     }
 
-    object ResultContract : ActivityResultContract<String?, String?>() {
+    class PostResult(
+        val newContent: String?,
+        val newVideo: String?
+    )
 
-        override fun createIntent(context: Context, input: String?): Intent {
+    object ResultContract : ActivityResultContract<PostResult?, PostResult?>() {
+
+        override fun createIntent(context: Context, input: PostResult?): Intent {
             val intent = Intent(context, NewPostActivity::class.java)
-            intent.putExtra(POST_CONTENT_EXTRA_KEY, input)
+            intent.putExtra(POST_CONTENT_EXTRA_KEY, input?.newContent)
+            intent.putExtra(POST_VIDEO_EXTRA_KEY, input?.newVideo)
             return intent
         }
 
-        override fun parseResult(resultCode: Int, intent: Intent?) =
+        override fun parseResult(resultCode: Int, intent: Intent?): PostResult? =
             if (resultCode == Activity.RESULT_OK) {
-                intent?.getStringExtra(POST_CONTENT_EXTRA_KEY)
+                PostResult(
+                newContent = intent?.getStringExtra(POST_CONTENT_EXTRA_KEY),
+                newVideo = intent?.getStringExtra(POST_VIDEO_EXTRA_KEY)
+                )
             } else null
     }
 }
