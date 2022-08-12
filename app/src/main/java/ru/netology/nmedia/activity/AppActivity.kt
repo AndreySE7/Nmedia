@@ -4,14 +4,14 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.snackbar.Snackbar
-import ru.netology.nmedia.databinding.ActivityShareBinding
+import ru.netology.nmedia.databinding.ActivityAppBinding
 
-class ShareActivity : AppCompatActivity() {
+class AppActivity : AppCompatActivity() {
 
-    override fun onPostCreate(savedInstanceState: Bundle?) {
-        super.onPostCreate(savedInstanceState)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
 
-        val binding = ActivityShareBinding.inflate(layoutInflater)
+        val binding = ActivityAppBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         val intent = intent ?: return
@@ -19,15 +19,12 @@ class ShareActivity : AppCompatActivity() {
 
         val text = intent.getStringExtra(Intent.EXTRA_TEXT)
         if (text.isNullOrBlank()) {
-            Snackbar.make(
-                binding.root,
-                "Пусто",
-                Snackbar.LENGTH_INDEFINITE
-            ).setAction(android.R.string.ok) {
+            Snackbar.make(binding.root, "Пусто", Snackbar.LENGTH_INDEFINITE)
+                .setAction(android.R.string.ok) {
                 finish()
             }.show()
         } else {
-            binding.root.text = text
+            binding.root
         }
     }
 }
