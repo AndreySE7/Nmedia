@@ -1,31 +1,22 @@
-package ru.netology.nmedia.activity
+package ru.netology.nmedia.ui
 
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import androidx.activity.viewModels
-import androidx.appcompat.app.AppCompatActivity
+import android.view.LayoutInflater
+import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import ru.netology.nmedia.adapter.PostAdapter
 import ru.netology.nmedia.databinding.ActivityMainBinding
 import ru.netology.nmedia.viewModel.PostViewModel
 
-class MainActivity : AppCompatActivity() {
+class FeedFragment : Fragment() {
+
+    private val viewModel by viewModels<PostViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-
-        val viewModel: PostViewModel by viewModels()
-
-        val adapter = PostAdapter(viewModel)
-        binding.postsRecyclerView.adapter = adapter
-        viewModel.data.observe(this) {posts ->
-            adapter.submitList(posts)
-        }
-        binding.addButton.setOnClickListener {
-            viewModel.addPostClicked()
-        }
 
         viewModel.shareEvent.observe(this) { post ->
             val intent = Intent().apply {
@@ -49,7 +40,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         val activityLauncher = registerForActivityResult(
-            NewPostActivity.ResultContract
+            NewPostFragment.ResultContract
         ) { PostResult ->
             PostResult?.newContent ?: return@registerForActivityResult
             viewModel.onSaveButtonClicked(PostResult.newContent, PostResult.newVideo)
@@ -58,4 +49,20 @@ class MainActivity : AppCompatActivity() {
             activityLauncher.launch(it)
         }
     }
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ) = ActivityMainBinding.inflate(layoutInflater, container, false).also { binding ->
+        val adapter = PostAdapter(viewModel)
+        binding.postsRecyclerView.adapter = adapter
+        viewModel.data.observe(viewLifecycleOwner) { posts ->
+            adapter.submitList(posts)
+        }
+        binding.addButton.setOnClickListener {
+            viewModel.addPostClicked()
+        }
+
+    }.root
 }

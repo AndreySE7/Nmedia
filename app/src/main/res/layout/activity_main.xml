@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.MainActivity" >
+    tools:context=".ui.AppActivity" >
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/postsRecyclerView"
@@ -25,6 +25,7 @@
         android:contentDescription="@string/button_ok"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@drawable/ic_add_24" />
+        app:srcCompat="@drawable/ic_add_24"
+        tools:ignore="ImageContrastCheck,ImageContrastCheck" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

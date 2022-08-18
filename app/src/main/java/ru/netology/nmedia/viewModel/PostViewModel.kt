@@ -4,7 +4,7 @@ import SingleLiveEvent
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
-import ru.netology.nmedia.activity.NewPostActivity
+import ru.netology.nmedia.ui.NewPostFragment
 import ru.netology.nmedia.adapter.PostInteractionListener
 import ru.netology.nmedia.data.PostRepository
 import ru.netology.nmedia.data.impr.FilePostRepository
@@ -22,7 +22,7 @@ class PostViewModel(application: Application) : AndroidViewModel(application),
 
     val shareEvent = SingleLiveEvent<String>()
 
-    val navigateToPostContentScreenEvent = SingleLiveEvent<NewPostActivity.PostResult?>()
+    val navigateToPostContentScreenEvent = SingleLiveEvent<NewPostFragment.PostResult?>()
 
     val navigateToVideo = SingleLiveEvent<String?>()
 
@@ -61,7 +61,7 @@ class PostViewModel(application: Application) : AndroidViewModel(application),
 
     override fun onEditClicked(post: Post) {
         currentPost.value = post
-        navigateToPostContentScreenEvent.value = NewPostActivity.PostResult(post.postText, post.video)
+        navigateToPostContentScreenEvent.value = NewPostFragment.PostResult(post.postText, post.video)
     }
 
     override fun onVideoClicked(post: Post) {
