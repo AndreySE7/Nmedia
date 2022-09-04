@@ -13,3 +13,8 @@ data class Post(
     var shares: Int = 0,
     val video: String? = null
 )
+
+class EditPostResult(
+    val newContent: String?,
+    val newVideo: String?
+)

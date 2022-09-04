@@ -1,14 +1,15 @@
 package ru.netology.nmedia.ui
 
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.setFragmentResultListener
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import ru.netology.nmedia.adapter.PostAdapter
-import ru.netology.nmedia.databinding.ActivityMainBinding
+import ru.netology.nmedia.databinding.FeedFragmentBinding
 import ru.netology.nmedia.viewModel.PostViewModel
 
 class FeedFragment : Fragment() {
@@ -28,25 +29,29 @@ class FeedFragment : Fragment() {
             startActivity(shareIntent)
         }
 
-        viewModel.navigateToVideo.observe(this) { video ->
-            val intent = Intent()
-                .apply {
-                    action = Intent.ACTION_VIEW
-                    data = Uri.parse(video)
-                }
-            val videoIntent =
-                Intent.createChooser(intent, "Видео: ")
-            startActivity(videoIntent)
-        }
+        setFragmentResultListener(
+            requestKey = NewPostFragment.REQUEST_KEY
+        ) { requestKey, bundle ->
+            if (requestKey != NewPostFragment.REQUEST_KEY) return@setFragmentResultListener
 
-        val activityLauncher = registerForActivityResult(
-            NewPostFragment.ResultContract
-        ) { PostResult ->
-            PostResult?.newContent ?: return@registerForActivityResult
-            viewModel.onSaveButtonClicked(PostResult.newContent, PostResult.newVideo)
+            val newPostContent = bundle.getString(
+                NewPostFragment.POST_CONTENT_EXTRA_KEY
+            ) ?: return@setFragmentResultListener
+            val newPostVideo = bundle.getString(
+                NewPostFragment.POST_VIDEO_EXTRA_KEY
+            ) ?: return@setFragmentResultListener
+            viewModel.onSaveButtonClicked(newPostContent, newPostVideo)
         }
-        viewModel.navigateToPostContentScreenEvent.observe(this) {
-            activityLauncher.launch(it)
+        viewModel.navigateToPostContentScreenEvent.observe(this) { initial ->
+            val direction = FeedFragmentDirections.actionFeedFragmentToNewPostFragment(
+                initial?.newContent,
+                initial?.newVideo
+            )
+            findNavController().navigate(direction)
+        }
+        viewModel.navigateToPostFragmentEvent.observe(this) { postId ->
+            val direction = FeedFragmentDirections.actionFeedFragmentToPostFragment(postId.toInt())
+            findNavController().navigate(direction)
         }
     }
 
@@ -54,7 +59,7 @@ class FeedFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ) = ActivityMainBinding.inflate(layoutInflater, container, false).also { binding ->
+    ) = FeedFragmentBinding.inflate(layoutInflater, container, false).also { binding ->
         val adapter = PostAdapter(viewModel)
         binding.postsRecyclerView.adapter = adapter
         viewModel.data.observe(viewLifecycleOwner) { posts ->
@@ -63,6 +68,5 @@ class FeedFragment : Fragment() {
         binding.addButton.setOnClickListener {
             viewModel.addPostClicked()
         }
-
     }.root
 }

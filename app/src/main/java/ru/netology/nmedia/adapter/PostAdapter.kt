@@ -4,11 +4,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.PopupMenu
+import androidx.constraintlayout.widget.Group
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import ru.netology.nmedia.R
-import ru.netology.nmedia.databinding.PostListBinding
+import ru.netology.nmedia.databinding.PostListFragmentBinding
 import ru.netology.nmedia.dto.Post
 
 class PostAdapter(
@@ -18,7 +19,7 @@ class PostAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
-        val binding = PostListBinding.inflate(
+        val binding = PostListFragmentBinding.inflate(
             inflater, parent, false
         )
         return ViewHolder(binding, interactionListener)
@@ -30,7 +31,7 @@ class PostAdapter(
     }
 
     class ViewHolder(
-        private val binding: PostListBinding,
+        private val binding: PostListFragmentBinding,
         listener: PostInteractionListener
     ) : RecyclerView.ViewHolder(binding.root) {
 
@@ -70,6 +71,14 @@ class PostAdapter(
             }
             binding.buttonPlay.setOnClickListener {
                 listener.onVideoClicked(post)
+            }
+            fun Group.setAllOnClickListener(listener: View.OnClickListener?) {
+                referencedIds.forEach { id ->
+                    rootView.findViewById<View>(id).setOnClickListener(listener)
+                }
+            }
+            binding.postGroup.setAllOnClickListener {
+                listener.onPostClicked(post)
             }
         }
 

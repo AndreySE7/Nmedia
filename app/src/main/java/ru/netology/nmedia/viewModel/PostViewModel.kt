@@ -4,10 +4,10 @@ import SingleLiveEvent
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
-import ru.netology.nmedia.ui.NewPostFragment
 import ru.netology.nmedia.adapter.PostInteractionListener
 import ru.netology.nmedia.data.PostRepository
 import ru.netology.nmedia.data.impr.FilePostRepository
+import ru.netology.nmedia.dto.EditPostResult
 import ru.netology.nmedia.dto.Post
 
 class PostViewModel(application: Application) : AndroidViewModel(application),
@@ -22,21 +22,23 @@ class PostViewModel(application: Application) : AndroidViewModel(application),
 
     val shareEvent = SingleLiveEvent<String>()
 
-    val navigateToPostContentScreenEvent = SingleLiveEvent<NewPostFragment.PostResult?>()
+    val navigateToPostContentScreenEvent = SingleLiveEvent<EditPostResult?>()
+
+    val navigateToPostFragmentEvent = SingleLiveEvent<Long>()
 
     val navigateToVideo = SingleLiveEvent<String?>()
 
-    fun onSaveButtonClicked(content: String, videoURL: String?) {
+    fun onSaveButtonClicked(content: String, video: String?) {
         if (content.isBlank()) return
         val post = currentPost.value?.copy(
             postText = content,
-            video = videoURL
+            video = video
         ) ?: Post(
             id = PostRepository.NEW_POST_ID,
             postText = content,
             postData = "Сегодня",
             postName = "Andrey",
-            video = videoURL
+            video = video
         )
         repository.savePost(post)
         currentPost.value = null
@@ -47,7 +49,6 @@ class PostViewModel(application: Application) : AndroidViewModel(application),
     }
 
     // region PostInteractionListener
-
     override fun onLikeClicked(post: Post) =
         repository.like(post.id)
 
@@ -61,13 +62,16 @@ class PostViewModel(application: Application) : AndroidViewModel(application),
 
     override fun onEditClicked(post: Post) {
         currentPost.value = post
-        navigateToPostContentScreenEvent.value = NewPostFragment.PostResult(post.postText, post.video)
+        navigateToPostContentScreenEvent.value = EditPostResult(post.postText, post.video)
     }
 
     override fun onVideoClicked(post: Post) {
         navigateToVideo.value = post.video
     }
 
+    override fun onPostClicked(post: Post) {
+        currentPost.value = post
+        navigateToPostFragmentEvent.value = post.id
+    }
     // endregion PostInteractionListener
-
 }

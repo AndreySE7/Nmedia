@@ -5,36 +5,26 @@ import android.view.View
 import android.view.ViewTreeObserver
 import android.view.inputmethod.InputMethodManager
 
-//internal fun View.hideKeyboard() {
-//    val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-//    imm.hideSoftInputFromWindow(windowToken,/*flags =*/0)
-//}
-//
-//internal fun View.showKeyboard() {
-//    val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager?
-//    imm!!.toggleSoftInput(0,/*flags =*/0)
-//}
-
 internal fun View.focusAndShowKeyboard() {
     /**
      * This is to be called when the window already has focus.
      */
     fun View.showTheKeyboardNow() {
-        if (isFocused) {
-            post {
-                // We still post the call, just in case we are being notified of the windows focus
-                // but InputMethodManager didn't get properly setup yet.
-                val imm =
-                    context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-                imm.showSoftInput(this, InputMethodManager.SHOW_IMPLICIT)
-            }
+        post {
+            // We still post the call, just in case we are being notified of the windows focus
+            // but InputMethodManager didn't get properly setup yet.
+            val imm =
+                context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            imm.showSoftInput(this, InputMethodManager.SHOW_IMPLICIT)
         }
     }
-    requestFocus()
+
     if (hasWindowFocus()) {
         // No need to wait for the window to get focus.
         showTheKeyboardNow()
     } else {
+        clearFocus()
+        showTheKeyboardNow()
         // We need to wait until the window gets focus.
         viewTreeObserver.addOnWindowFocusChangeListener(
             object : ViewTreeObserver.OnWindowFocusChangeListener {
@@ -47,5 +37,6 @@ internal fun View.focusAndShowKeyboard() {
                     }
                 }
             })
+        requestFocus()
     }
 }

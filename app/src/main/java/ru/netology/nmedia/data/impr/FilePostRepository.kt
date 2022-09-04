@@ -10,13 +10,12 @@ import ru.netology.nmedia.data.PostRepository
 import ru.netology.nmedia.dto.Post
 import kotlin.properties.Delegates
 
-class FilePostRepository(
+class FilePostRepository constructor(
     private val application: Application
 ) : PostRepository {
 
     private val gson = Gson()
     private val type = TypeToken.getParameterized(List::class.java, Post::class.java).type
-
     private val prefs = application.getSharedPreferences(
         "repo", Context.MODE_PRIVATE
     )
@@ -29,12 +28,10 @@ class FilePostRepository(
 
     private var posts
         get() = checkNotNull(data.value) {
+            "Data value should not be null"
         }
         set(value) {
-            application.openFileOutput(
-                FILE_NAME,
-                Context.MODE_PRIVATE
-            ).bufferedWriter().use {
+            application.openFileOutput(FILE_NAME, Context.MODE_PRIVATE).bufferedWriter().use {
                 it.write(gson.toJson(value))
             }
             data.value = value
@@ -50,7 +47,7 @@ class FilePostRepository(
             reader.use {
                 gson.fromJson(it, type)
             }
-            } else emptyList()
+        } else emptyList()
         data = MutableLiveData(posts)
     }
 
@@ -67,7 +64,7 @@ class FilePostRepository(
     override fun share(postId: Long) {
         posts = posts.map {
             if (it.id == postId) it.copy(
-                shares = it.shares +1
+                shares = it.shares + 1
             )
             else it
         }
@@ -84,11 +81,7 @@ class FilePostRepository(
     }
 
     private fun insert(post: Post) {
-        posts = listOf(
-            post.copy(
-                id = ++nextId
-            )
-        ) + posts
+        posts = listOf(post.copy(id = ++nextId)) + posts
     }
 
     private fun update(post: Post) {
@@ -97,8 +90,33 @@ class FilePostRepository(
         }
     }
 
-    private companion object {
+    private companion object :
+        SingletonHolder<FilePostRepository, Application>(::FilePostRepository) {
         const val NEXT_ID_PREFS_KEY = "nextId"
         const val FILE_NAME = "posts.json"
+    }
+}
+
+
+open class SingletonHolder<out T: Any, in A>(creator: (A) -> T) {
+    private var creator: ((A) -> T)? = creator
+    @Volatile
+    private var instance: T? = null
+    fun getInstance(arg: A): T {
+        val checkInstance = instance
+        if (checkInstance != null) {
+            return checkInstance
+        }
+        return synchronized(this) {
+            val checkInstanceAgain = instance
+            if (checkInstanceAgain != null) {
+                checkInstanceAgain
+            } else {
+                val created = creator!!(arg)
+                instance = created
+                creator = null
+                created
+            }
+        }
     }
 }
