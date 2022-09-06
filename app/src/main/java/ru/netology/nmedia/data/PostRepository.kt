@@ -1,13 +1,22 @@
 package ru.netology.nmedia.data
 
-import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.LiveData
 import ru.netology.nmedia.dto.Post
 
 interface PostRepository {
-    val data: MutableLiveData<Post>
+    val data: LiveData<List<Post>>
 
-    fun like()
+    fun like(postId: Long)
 
-    fun share()
+    fun share(postId: Long)
+
+    fun deletePost(postId: Long)
+
+    fun savePost(post: Post)
+
+    companion object {
+
+        const val NEW_POST_ID = 0L
+    }
 }
 

@@ -1,5 +1,8 @@
 package ru.netology.nmedia.dto
 
+import kotlinx.serialization.Serializable
+
+@Serializable
 data class Post(
     val id: Long,
     val postName: String,
@@ -7,7 +10,11 @@ data class Post(
     val postText: String,
     val likedByMe: Boolean = false,
     val likes: Int = 0,
-    val countLikeFormat: Any = countLiked(likes, likedByMe),
     var shares: Int = 0,
-    val countShareFormat: Any = countShared(shares)
+    val video: String? = null
+)
+
+class EditPostResult(
+    val newContent: String?,
+    val newVideo: String?
 )

@@ -3,13 +3,47 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Andre/AndroidStudioProjects/Nmedia/app/src/main/res/drawable/ic_add_options.xml" value="0.105" />
+        <entry key="..\:/Users/Andre/AndroidStudioProjects/Nmedia/app/src/main/res/drawable/ic_baseline_cancel_24.xml" value="0.105" />
+        <entry key="..\:/Users/Andre/AndroidStudioProjects/Nmedia/app/src/main/res/drawable/ic_cancel_24.xml" value="0.105" />
+        <entry key="..\:/Users/Andre/AndroidStudioProjects/Nmedia/app/src/main/res/drawable/ic_check.xml" value="0.105" />
+        <entry key="..\:/Users/Andre/AndroidStudioProjects/Nmedia/app/src/main/res/drawable/ic_edit.xml" value="0.1825" />
         <entry key="..\:/Users/Andre/AndroidStudioProjects/Nmedia/app/src/main/res/drawable/ic_launcher_background.xml" value="0.2125" />
         <entry key="..\:/Users/Andre/AndroidStudioProjects/Nmedia/app/src/main/res/drawable/ic_launcher_foreground.xml" value="0.2125" />
         <entry key="..\:/Users/Andre/AndroidStudioProjects/Nmedia/app/src/main/res/drawable/ic_like.xml" value="0.1935" />
+        <entry key="..\:/Users/Andre/AndroidStudioProjects/Nmedia/app/src/main/res/drawable/ic_liked.xml" value="0.105" />
+        <entry key="..\:/Users/Andre/AndroidStudioProjects/Nmedia/app/src/main/res/drawable/ic_ok_24dp.xml" value="0.1825" />
         <entry key="..\:/Users/Andre/AndroidStudioProjects/Nmedia/app/src/main/res/drawable/ic_options_24dp.xml" value="0.2125" />
+        <entry key="..\:/Users/Andre/AndroidStudioProjects/Nmedia/app/src/main/res/drawable/ic_red_like.xml" value="0.105" />
+        <entry key="..\:/Users/Andre/AndroidStudioProjects/Nmedia/app/src/main/res/drawable/ic_share.xml" value="0.1825" />
+        <entry key="..\:/Users/Andre/AndroidStudioProjects/Nmedia/app/src/main/res/drawable/ic_shared.xml" value="0.105" />
+        <entry key="..\:/Users/Andre/AndroidStudioProjects/Nmedia/app/src/main/res/drawable/ic_viewing.xml" value="0.105" />
         <entry key="..\:/Users/Andre/AndroidStudioProjects/Nmedia/app/src/main/res/layout-land/activity_main.xml" value="0.30687830687830686" />
-        <entry key="..\:/Users/Andre/AndroidStudioProjects/Nmedia/app/src/main/res/layout/activity_main.xml" value="0.5" />
+        <entry key="..\:/Users/Andre/AndroidStudioProjects/Nmedia/app/src/main/res/layout/activity_edit_post.xml" value="0.2" />
+        <entry key="..\:/Users/Andre/AndroidStudioProjects/Nmedia/app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="..\:/Users/Andre/AndroidStudioProjects/Nmedia/app/src/main/res/layout/activity_new_post.xml" value="0.25" />
+        <entry key="..\:/Users/Andre/AndroidStudioProjects/Nmedia/app/src/main/res/layout/activity_share.xml" value="0.2" />
+        <entry key="..\:/Users/Andre/AndroidStudioProjects/Nmedia/app/src/main/res/layout/app_activity.xml" value="0.1762917933130699" />
+        <entry key="..\:/Users/Andre/AndroidStudioProjects/Nmedia/app/src/main/res/layout/feed_fragment.xml" value="0.22" />
+        <entry key="..\:/Users/Andre/AndroidStudioProjects/Nmedia/app/src/main/res/layout/new_post_fragment.xml" value="0.18541666666666667" />
         <entry key="..\:/Users/Andre/AndroidStudioProjects/Nmedia/app/src/main/res/layout/post.xml" value="0.33" />
+        <entry key="..\:/Users/Andre/AndroidStudioProjects/Nmedia/app/src/main/res/layout/post_fragment.xml" value="0.16032608695652173" />
+        <entry key="..\:/Users/Andre/AndroidStudioProjects/Nmedia/app/src/main/res/layout/post_list.xml" value="0.33" />
+        <entry key="..\:/Users/Andre/AndroidStudioProjects/Nmedia/app/src/main/res/layout/post_list_fragment.xml" value="0.33" />
+        <entry key="..\:/Users/Andre/AndroidStudioProjects/Nmedia/app/src/main/res/menu/options_post.xml" value="0.18541666666666667" />
+        <entry key="..\:/Users/andre/AndroidStudioProjects/Nmedia/app/src/main/res/drawable/ic_ok_24dp.xml" value="0.196" />
+        <entry key="..\:/Users/andre/AndroidStudioProjects/Nmedia/app/src/main/res/drawable/ic_play_24.xml" value="0.196" />
+        <entry key="..\:/Users/andre/AndroidStudioProjects/Nmedia/app/src/main/res/drawable/ic_play_24dp.xml" value="0.196" />
+        <entry key="..\:/Users/andre/AndroidStudioProjects/Nmedia/app/src/main/res/layout/activity_app.xml" value="0.17481884057971014" />
+        <entry key="..\:/Users/andre/AndroidStudioProjects/Nmedia/app/src/main/res/layout/activity_main.xml" value="0.10190217391304347" />
+        <entry key="..\:/Users/andre/AndroidStudioProjects/Nmedia/app/src/main/res/layout/activity_new_post.xml" value="0.5228215767634855" />
+        <entry key="..\:/Users/andre/AndroidStudioProjects/Nmedia/app/src/main/res/layout/activity_share.xml" value="0.18802083333333333" />
+        <entry key="..\:/Users/andre/AndroidStudioProjects/Nmedia/app/src/main/res/layout/app_activity.xml" value="0.18802083333333333" />
+        <entry key="..\:/Users/andre/AndroidStudioProjects/Nmedia/app/src/main/res/layout/fragment_feed.xml" value="0.20969202898550723" />
+        <entry key="..\:/Users/andre/AndroidStudioProjects/Nmedia/app/src/main/res/layout/fragment_new_post.xml" value="0.18802083333333333" />
+        <entry key="..\:/Users/andre/AndroidStudioProjects/Nmedia/app/src/main/res/layout/post_list.xml" value="0.5" />
+        <entry key="..\:/Users/andre/AndroidStudioProjects/Nmedia/app/src/main/res/layout/sss.xml" value="0.18802083333333333" />
+        <entry key="..\:/Users/andre/AndroidStudioProjects/Nmedia/app/src/main/res/menu/options_post.xml" value="0.18802083333333333" />
       </map>
     </option>
   </component>
