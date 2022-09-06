@@ -48,6 +48,7 @@ class PostFragment : Fragment() {
                             }
                             R.id.edit -> {
                                 viewModel.onEditClicked(post)
+                                findNavController().navigateUp()
                                 true
                             }
                             else -> false
@@ -75,15 +76,6 @@ class PostFragment : Fragment() {
             }
             val shareIntent = Intent.createChooser(intent, "Поделиться: ")
             startActivity(shareIntent)
-        }
-
-        viewModel.navigateToPostContentScreenEvent.observe(viewLifecycleOwner) { editPostResult ->
-            val direction =
-                PostFragmentDirections.actionPostFragmentToNewPostFragment(
-                    editPostResult?.newContent,
-                    editPostResult?.newVideo
-                )
-            findNavController().navigate(direction)
         }
         return binding.root
     }

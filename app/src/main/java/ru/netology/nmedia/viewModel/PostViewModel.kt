@@ -70,7 +70,6 @@ class PostViewModel(application: Application) : AndroidViewModel(application),
     }
 
     override fun onPostClicked(post: Post) {
-        currentPost.value = post
         navigateToPostFragmentEvent.value = post.id
     }
     // endregion PostInteractionListener

@@ -53,6 +53,13 @@ class FeedFragment : Fragment() {
             val direction = FeedFragmentDirections.actionFeedFragmentToPostFragment(postId.toInt())
             findNavController().navigate(direction)
         }
+        viewModel.navigateToPostContentScreenEvent.observe(this) { editPost ->
+            val direction = FeedFragmentDirections.actionFeedFragmentToNewPostFragment(
+                editPost?.newContent,
+                editPost?.newVideo
+            )
+            findNavController().navigate(direction)
+        }
     }
 
     override fun onCreateView(
