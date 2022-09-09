@@ -86,9 +86,9 @@ class PostAdapter(
             this.post = post
 
             with(binding) {
-                postName.text = post.postName
-                postData.text = post.postData
-                postText.text = post.postText
+                postName.text = post.author
+                postData.text = post.published
+                postText.text = post.content
                 like.text = post.likes.toString()
                 like.isChecked = post.likedByMe
                 like.setBackgroundColor(android.R.drawable.btn_default)

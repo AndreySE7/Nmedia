@@ -3,8 +3,6 @@ package ru.netology.nmedia.data.impr
 import androidx.lifecycle.MutableLiveData
 import ru.netology.nmedia.data.PostRepository
 import ru.netology.nmedia.dto.Post
-import ru.netology.nmedia.dto.countLiked
-import ru.netology.nmedia.dto.countShared
 
 class InMemoryPostRepository : PostRepository {
 
@@ -20,9 +18,9 @@ class InMemoryPostRepository : PostRepository {
         List(GENERATED_POSTS_AMOUNT.toInt()) { index ->
             Post(
                 id = index + 1L,
-                postName = "Нетология. Университет интернет-профессий",
-                postData = "07.08.2022",
-                postText = "Привет, это новая Нетология!",
+                author = "Нетология. Университет интернет-профессий",
+                published = "07.08.2022",
+                content = "Привет, это новая Нетология!",
                 video = "https://www.youtube.com/watch?v=4IIjp2mljbs&ab_channel=KOSMO"
             )
         }

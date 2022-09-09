@@ -7,6 +7,8 @@ import androidx.lifecycle.MutableLiveData
 import ru.netology.nmedia.adapter.PostInteractionListener
 import ru.netology.nmedia.data.PostRepository
 import ru.netology.nmedia.data.impr.FilePostRepository
+import ru.netology.nmedia.data.impr.SQLiteRepository
+import ru.netology.nmedia.db.AppDb
 import ru.netology.nmedia.dto.EditPostResult
 import ru.netology.nmedia.dto.Post
 
@@ -14,7 +16,11 @@ class PostViewModel(application: Application) : AndroidViewModel(application),
     PostInteractionListener {
 
     private val repository: PostRepository =
-        FilePostRepository(application)
+        SQLiteRepository(
+            dao = AppDb.getInstance(
+                context = application
+            ).postDao
+        )
 
     val data by repository::data
 
@@ -31,13 +37,13 @@ class PostViewModel(application: Application) : AndroidViewModel(application),
     fun onSaveButtonClicked(content: String, video: String?) {
         if (content.isBlank()) return
         val post = currentPost.value?.copy(
-            postText = content,
+            content = content,
             video = video
         ) ?: Post(
             id = PostRepository.NEW_POST_ID,
-            postText = content,
-            postData = "Сегодня",
-            postName = "Andrey",
+            content = content,
+            published = "Сегодня",
+            author = "Andrey",
             video = video
         )
         repository.savePost(post)
@@ -54,7 +60,7 @@ class PostViewModel(application: Application) : AndroidViewModel(application),
 
     override fun onShareClicked(post: Post) {
         repository.share(post.id)
-        shareEvent.value = post.postText
+        shareEvent.value = post.content
     }
 
     override fun onDeleteClicked(post: Post) =
@@ -62,7 +68,7 @@ class PostViewModel(application: Application) : AndroidViewModel(application),
 
     override fun onEditClicked(post: Post) {
         currentPost.value = post
-        navigateToPostContentScreenEvent.value = EditPostResult(post.postText, post.video)
+        navigateToPostContentScreenEvent.value = EditPostResult(post.content, post.video)
     }
 
     override fun onVideoClicked(post: Post) {

@@ -5,9 +5,9 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class Post(
     val id: Long,
-    val postName: String,
-    val postData: String,
-    val postText: String,
+    val author: String,
+    val published: String,
+    val content: String,
     val likedByMe: Boolean = false,
     val likes: Int = 0,
     var shares: Int = 0,
