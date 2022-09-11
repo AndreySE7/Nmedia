@@ -3,7 +3,6 @@ package ru.netology.nmedia.db
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
-import ru.netology.nmedia.data.impr.SQLiteRepository
 
 class DbHelper(context: Context, dbVersion: Int, dbName: String, private val DDLs: Array<String>) :
     SQLiteOpenHelper(context, dbName, null, dbVersion) {
